@@ -62,7 +62,7 @@ const ChatBubble = ({ role, text }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#333',
-    borderRadius: 3,
+    borderRadius: 2,
     padding: 12,
     marginVertical: 4,
     maxWidth: '80%',
