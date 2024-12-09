@@ -32,12 +32,15 @@ export default function ChatBot() {
       );
       const modelResponse = response.data;
       const modelResposes = modelResponse?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-      if (modelResposes) {
+  
+      // Clean the output to remove unwanted characters like ***
+      const cleanedResponse = modelResposes.replace(/[*]+/g, ''); // Remove asterisks
+      if (cleanedResponse) {
         const updateChatWithModel = [
           ...updateChat,
           {
             role: 'model',
-            parts: [{ text: modelResposes }],
+            parts: [{ text: cleanedResponse }],
           }
         ];
         setMessages(updateChatWithModel);
@@ -50,7 +53,7 @@ export default function ChatBot() {
       setLoading(false);
     }
   }, [userInput, messages]);
-
+  
   const handleSpeech = useCallback(async (text) => {
     console.log('handleSpeech called with text:', text);
     if (!isSpeaking) {
@@ -187,7 +190,10 @@ const styles = StyleSheet.create({
     display:'flex',
     flexDirection:'column',
     position: 'absolute',
-    top: -10,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   errorText: {
     color: 'red',
