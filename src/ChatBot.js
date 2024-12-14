@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -12,6 +12,12 @@ export default function ChatBot() {
   const [loading, setLoading] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [error, setError] = useState(null);
+  const scrollRef=useRef(null);
+
+  useEffect(()=>
+  {
+    scrollRef.current?.scrollToEnd({animated:true})
+  },[messages])
 
   const API_KEY = 'AIzaSyD1rrm09TOs_ytwukPKm4hjYppSIZL1_go';
 
@@ -77,11 +83,17 @@ export default function ChatBot() {
 
   const renderChatItem = ({ item }) => {
     return (
+      <ScrollView
+      ref={scrollRef}
+      contentContainerStyle={styles.chatContainer}
+      showsVerticalScrollIndicator={false}
+    >
       <ChatBubble
         role={item.role}
         text={item.parts[0].text}
         onSpeech={item.role === 'model' ? () => handleSpeech(item.parts[0].text) : null}  
       />
+      </ScrollView>
     );
   };
 
