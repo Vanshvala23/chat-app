@@ -22,6 +22,7 @@ export default function ChatBot() {
   const API_KEY = 'AIzaSyD1rrm09TOs_ytwukPKm4hjYppSIZL1_go';
 
   const handleUser = useCallback(async () => {
+    if(!userInput.trim()) return ;
     try {
       const updateChat = [
         ...messages,
@@ -53,7 +54,7 @@ export default function ChatBot() {
         setUserInput('');
       }
     } catch (error) {
-      console.error("Error in Venom Pro :", error);
+      console.error("Error in Venom AI :", error);
       setError("An error occurred");
     } finally {
       setLoading(false);
@@ -99,9 +100,8 @@ export default function ChatBot() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['magenta', 'black']} style={styles.textContainer}>
-        <Text style={[styles.title]}  selectionColor={['magenta']}>Venom AI ✨</Text>
-        
+       <LinearGradient colors={['#222', '#000']} style={styles.header}>
+        <Text style={styles.title}>Venom AI ✨</Text>
       </LinearGradient>
       <ScrollView
         style={{ flex: 1 }}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
- padding: 0,
+    padding: 0,
     margin: 0,
   },
   textContainer: {
