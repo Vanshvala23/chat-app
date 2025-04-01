@@ -19,7 +19,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.Venom_AI"
+      "package": "com.venom_ai"
     },
     "web": {
       "favicon": "./assets/favicon.png"
