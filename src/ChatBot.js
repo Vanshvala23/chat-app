@@ -19,7 +19,7 @@ export default function ChatBot() {
     scrollRef.current?.scrollToEnd({animated:true})
   },[messages])
 
-  const API_KEY = 'AIzaSyD1rrm09TOs_ytwukPKm4hjYppSIZL1_go';
+  const API_KEY = API_KEY;
 
   const handleUser = useCallback(async () => {
     if(!userInput.trim()) return ;
